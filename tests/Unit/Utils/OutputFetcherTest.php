@@ -35,25 +35,33 @@ class OutputFetcherTest extends TestCase
     public function itDeterminesTheCorrectAmountOfUnitsDataProvider(): array
     {
         $output = <<<OUTPUT
-  superservice.service      Active running
-  awesomeservice.service    Active running
-  nonservice.timer          Active running
-  superservice.mount        Active running
-  awesomeservice.mount      Active running
-  nonservice.timer          Active running
-  superservice.service      Active running
-  awesomeservice.service    Active running
+  superservice.service         active running
+  awesomeservice.service       active running
+  nonservice.timer             active running
+  nonservice.socket            active running
+  superservice.mount           active running
+  awesomeservice.mount         active running
+  nonservice.timer             active running
+  nonservice.socket            active running
+  superservice.service         active running
+  awesomeservice.service       active running
+● failed-service@foo.service   loaded failed failed
 OUTPUT;
 
         return [
             [
                 'output' => $output,
                 'suffix' => 'service',
-                'amount' => 4,
+                'amount' => 5,
             ],
             [
                 'output' => $output,
                 'suffix' => 'timer',
+                'amount' => 2,
+            ],
+            [
+                'output' => $output,
+                'suffix' => 'socket',
                 'amount' => 2,
             ],
             [
@@ -92,11 +100,14 @@ OUTPUT;
   foo.service      Active running
   foo-bar.service    Active running
   a-timer.timer          Active running
+  a-socket.socket          Active running
   super.mount        Active running
   awesome.mount      Active running
   nonservice.timer          Active running
+  nonservice.socket          Active running
   instance-service@1.service      Active running
   instance-service@foo.service    Active running
+● failed-service@foo.service loaded failed failed
 OUTPUT;
 
         return [
@@ -108,6 +119,7 @@ OUTPUT;
                     'foo-bar',
                     'instance-service@1',
                     'instance-service@foo',
+                    'failed-service@foo'
                 ],
             ],
             [
@@ -115,6 +127,14 @@ OUTPUT;
                 'suffix' => 'timer',
                 'units'  => [
                     'a-timer',
+                    'nonservice',
+                ],
+            ],
+            [
+                'output' => $output,
+                'suffix' => 'socket',
+                'units'  => [
+                    'a-socket',
                     'nonservice',
                 ],
             ],

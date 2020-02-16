@@ -1,14 +1,14 @@
 <?php
 
-namespace SystemCtl\Tests\Unit\Utils;
+namespace icanhazstring\SystemCtl\Test\Unit\Utils;
 
 use PHPUnit\Framework\TestCase;
-use SystemCtl\Utils\OutputFetcher;
+use icanhazstring\SystemCtl\Utils\OutputFetcher;
 
 /**
  * Class OutputFetcherTest
  *
- * @package SystemCtl\Test\Unit\Utils
+ * @package icanhazstring\SystemCtl\Test\Unit\Utils
  */
 class OutputFetcherTest extends TestCase
 {
@@ -24,7 +24,7 @@ class OutputFetcherTest extends TestCase
         string $output,
         string $suffix,
         int $expectedAmount
-    ) {
+    ): void {
         $units = OutputFetcher::fetchUnitNames($suffix, $output);
         $this->assertCount($expectedAmount, $units);
     }
@@ -85,7 +85,7 @@ OUTPUT;
      * @test
      * @dataProvider itOnlyExtractsTheUnitNamesDataProvider
      */
-    public function itOnlyExtractsTheUnitNames(string $output, string $suffix, array $expectedUnitNames)
+    public function itOnlyExtractsTheUnitNames(string $output, string $suffix, array $expectedUnitNames): void
     {
         $units = OutputFetcher::fetchUnitNames($suffix, $output);
         $this->assertEquals($expectedUnitNames, $units);

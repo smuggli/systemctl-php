@@ -1,14 +1,13 @@
 <?php
 
+namespace icanhazstring\SystemCtl\Command;
 
-namespace SystemCtl\Command;
-
-use SystemCtl\Exception\CommandFailedException;
+use icanhazstring\SystemCtl\Exception\CommandFailedException;
 
 /**
  * Interface CommandInterface
  *
- * @package SystemCtl\Command
+ * @package icanhazstring\SystemCtl\Command
  * @author icanhazstring <blubb0r05+github@gmail.com>
  */
 interface CommandInterface

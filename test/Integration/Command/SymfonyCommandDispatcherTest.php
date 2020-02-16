@@ -1,14 +1,14 @@
 <?php
 
-namespace SystemCtl\Tests\Integration\Command;
+namespace icanhazstring\SystemCtl\Test\Integration\Command;
 
 use PHPUnit\Framework\TestCase;
-use SystemCtl\Command\SymfonyCommandDispatcher;
+use icanhazstring\SystemCtl\Command\SymfonyCommandDispatcher;
 
 /**
  * Class SymfonyCommandDispatcherTest
  *
- * @package SystemCtl\Tests\Integration\Command
+ * @package icanhazstring\SystemCtl\Test\Integration\Command
  * @author icanhazstring <blubb0r05+github@gmail.com>
  */
 class SymfonyCommandDispatcherTest extends TestCase
@@ -16,7 +16,7 @@ class SymfonyCommandDispatcherTest extends TestCase
     /**
      * @test
      */
-    public function itShouldDispatchACorrectCommand()
+    public function itShouldDispatchACorrectCommand(): void
     {
         $dispatcher = new SymfonyCommandDispatcher();
         $dispatcher->setBinary('echo');

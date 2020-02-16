@@ -1,21 +1,21 @@
 <?php
 
-namespace SystemCtl\Tests\Integration;
+namespace icanhazstring\SystemCtl\Test\Integration;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
-use SystemCtl\Command\CommandDispatcherInterface;
-use SystemCtl\Command\CommandInterface;
-use SystemCtl\Exception\UnitTypeNotSupportedException;
-use SystemCtl\SystemCtl;
-use SystemCtl\Unit\Service;
-use SystemCtl\Unit\UnitInterface;
+use icanhazstring\SystemCtl\Command\CommandDispatcherInterface;
+use icanhazstring\SystemCtl\Command\CommandInterface;
+use icanhazstring\SystemCtl\Exception\UnitTypeNotSupportedException;
+use icanhazstring\SystemCtl\SystemCtl;
+use icanhazstring\SystemCtl\Unit\Service;
+use icanhazstring\SystemCtl\Unit\UnitInterface;
 
 /**
  * Class SystemCtlTest
  *
- * @package SystemCtl\Test\Integration
+ * @package icanhazstring\SystemCtl\Test\Integration
  */
 class SystemCtlTest extends TestCase
 {
@@ -31,7 +31,7 @@ class SystemCtlTest extends TestCase
         return $commandDispatcher;
     }
 
-    public function testListUnitsWithAvailableUnits()
+    public function testListUnitsWithAvailableUnits(): void
     {
         $output = <<<EOT
   proc-sys-fs-binfmt_misc.timer                      loaded active mounted
@@ -61,7 +61,7 @@ EOT;
         $this->assertCount(12, $units);
     }
 
-    public function testListUnitsWithSupportedUnits()
+    public function testListUnitsWithSupportedUnits(): void
     {
         $output = <<<EOT
   proc-sys-fs-binfmt_misc.timer                      loaded active mounted
@@ -90,7 +90,7 @@ EOT;
         $this->assertCount(5, $units);
     }
 
-    public function testCreateUnitFromSupportedSuffixShouldWord()
+    public function testCreateUnitFromSupportedSuffixShouldWord(): void
     {
         $unit = SystemCtl::unitFromSuffix('service', 'SuccessService');
         $this->assertInstanceOf(UnitInterface::class, $unit);
@@ -98,13 +98,13 @@ EOT;
         $this->assertEquals('SuccessService', $unit->getName());
     }
 
-    public function testCreateUnitFromUnsupportedSuffixShouldRaiseException()
+    public function testCreateUnitFromUnsupportedSuffixShouldRaiseException(): void
     {
         $this->expectException(UnitTypeNotSupportedException::class);
         SystemCtl::unitFromSuffix('unsupported', 'FailUnit');
     }
 
-    public function testGetServices()
+    public function testGetServices(): void
     {
         $output = <<<EOT
 PLACEHOLDER STUFF
@@ -129,7 +129,7 @@ EOT;
         $this->assertCount(2, $services);
     }
 
-    public function testGetTimers()
+    public function testGetTimers(): void
     {
         $output = <<<EOT
 PLACEHOLDER STUFF
@@ -156,7 +156,7 @@ EOT;
     /**
      * @test
      */
-    public function itShouldReturnTrueOnSuccessfulDaemonReload()
+    public function itShouldReturnTrueOnSuccessfulDaemonReload(): void
     {
         $command = $this->prophesize(CommandInterface::class);
         $command->isSuccessful()->willReturn(true);
